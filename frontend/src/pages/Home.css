@@ -1,0 +1,285 @@
+/* ── Home Page Dashboard Redesign ── */
+.home-dashboard {
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: inherit;
+}
+
+/* ── Hero Banner (Dark Theme Integration) ── */
+.home-hero {
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 3rem 2rem;
+  border-bottom: 4px solid var(--primary-color);
+}
+
+.hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.user-profile-brief {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.big-avatar {
+  width: 80px;
+  height: 80px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: white;
+  box-shadow: 0 4px 15px rgba(134, 194, 50, 0.3);
+}
+
+.welcome-text h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.welcome-text h1 span {
+  color: var(--primary-color);
+}
+
+.welcome-text p {
+  margin: 0.25rem 0 0;
+  opacity: 0.8;
+  font-size: 1.1rem;
+}
+
+.welcome-text p strong {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+}
+
+.h-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.h-val {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--primary-color);
+}
+
+.h-lbl {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+}
+
+/* ── Main Content Area ── */
+.dashboard-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+}
+
+.main-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.dashboard-section {
+  width: 100%;
+}
+
+.section-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  /* Tighter header space */
+  color: var(--secondary-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ── Game Modes Grid ── */
+.game-modes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.mode-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.5rem 1.5rem 1.25rem;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s cubic-bezier(.4, 0, .2, 1),
+    box-shadow 0.25s cubic-bezier(.4, 0, .2, 1);
+}
+
+.mode-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.mode-icon {
+  font-size: 1.6rem;
+  margin-bottom: 0.9rem;
+}
+
+.mode-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  line-height: 1.3;
+}
+
+.mode-desc {
+  margin: 0.3rem 0 0;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+/* ── Recent Activity ── */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.view-all {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.view-all:hover {
+  text-decoration: underline;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.history-item {
+  background: var(--card-bg);
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  border-left: 4px solid #cbd5e1;
+}
+
+.history-item.win {
+  border-left-color: var(--primary-color);
+}
+
+.history-item.loss {
+  border-left-color: var(--danger);
+}
+
+.history-item.draw {
+  border-left-color: var(--warning);
+}
+
+.outcome-icon {
+  font-size: 1.2rem;
+}
+
+.match-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.match-opp {
+  font-weight: 600;
+  color: var(--secondary-color);
+}
+
+.match-type {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.match-score {
+  text-align: right;
+}
+
+.score-delta {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.score-delta.plus {
+  color: var(--primary-color);
+}
+
+.score-delta.minus {
+  color: var(--danger);
+}
+
+/* ── Placeholders ── */
+.loader-placeholder,
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  background: white;
+  border-radius: 12px;
+  color: var(--text-secondary);
+  border: 2px dashed #eee;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .hero-container {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .user-profile-brief {
+    flex-direction: column;
+  }
+
+  .hero-stats {
+    gap: 1.5rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .game-modes-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}

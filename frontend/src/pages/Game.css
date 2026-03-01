@@ -1,0 +1,865 @@
+.game {
+  min-height: 100vh;
+  background: var(--bg-color);
+}
+
+.game-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  gap: 1rem;
+}
+
+.game-loading p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.game-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.game-board-container {
+  display: flex;
+  flex-direction: row;
+  /* timers LEFT, board RIGHT */
+  align-items: center;
+  gap: 1rem;
+}
+
+/* ── Timer column (left side) ── */
+.timer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-self: stretch;
+  justify-content: space-between;
+}
+
+.timer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: var(--secondary-color);
+  color: white;
+  border-radius: 10px;
+  min-width: 140px;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.timer.active {
+  background: var(--primary-color);
+  box-shadow: 0 0 20px rgba(134, 194, 50, 0.45);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: scale(1.04);
+}
+
+/* Colour dot */
+.timer-color-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.timer-color-dot.black-dot {
+  background: #1a1a1a;
+}
+
+.timer-color-dot.white-dot {
+  background: #f0f0f0;
+}
+
+.timer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.timer-label {
+  font-size: 0.75rem;
+  opacity: 0.75;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+.timer-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.board-wrapper {
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Give squares a pointer cursor so click-to-move feels natural */
+.board-wrapper [data-square] {
+  cursor: pointer;
+}
+
+/* ── Captured / Dead Pieces ── */
+.captured-row {
+  padding: 0.35rem 0.5rem;
+  min-height: 32px;
+}
+
+.captured-row.top {
+  margin-bottom: 0.3rem;
+}
+
+.captured-row.bottom {
+  margin-top: 0.3rem;
+}
+
+.captured-pieces {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0;
+  min-height: 26px;
+}
+
+.captured-piece {
+  font-size: 1.35rem;
+  line-height: 1;
+  margin-right: -2px;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+  transition: transform 0.15s;
+  cursor: default;
+}
+
+.captured-piece:hover {
+  transform: scale(1.25);
+  z-index: 1;
+}
+
+.material-diff {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--success, #22c55e);
+  margin-left: 0.4rem;
+  padding: 0.1rem 0.4rem;
+  background: rgba(34, 197, 94, 0.1);
+  border-radius: 4px;
+}
+
+.material-diff.negative {
+  color: var(--danger, #ef4444);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* ── Opponent disconnect countdown banner ── */
+.disconnect-banner {
+  position: relative;
+  background: rgba(220, 38, 38, 0.12);
+  border: 1px solid rgba(220, 38, 38, 0.4);
+  border-radius: 8px;
+  margin-bottom: 0.6rem;
+  padding: 0.6rem 1rem;
+  overflow: hidden;
+}
+
+.disconnect-progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(220, 38, 38, 0.2);
+  transition: width 1s linear;
+  border-radius: 8px 0 0 8px;
+}
+
+.disconnect-text {
+  position: relative;
+  font-size: 0.88rem;
+  color: #f87171;
+  font-weight: 600;
+  z-index: 1;
+}
+
+/* ── Check Race counters banner ── */
+.checkrace-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  margin-bottom: 0.6rem;
+  background: linear-gradient(135deg, rgba(134, 194, 50, 0.08), rgba(99, 102, 241, 0.08));
+  border: 1px solid rgba(134, 194, 50, 0.3);
+  border-radius: 8px;
+}
+
+.check-count {
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+}
+
+.white-checks {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.black-checks {
+  background: rgba(0, 0, 0, 0.15);
+  color: var(--text-primary);
+}
+
+/* ── Sidebar ── */
+.game-sidebar {
+  flex: 0 0 320px;
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+.game-info-section,
+.moves-section,
+.game-id-section {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+.game-sidebar h3 {
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* ── Game ID Share ── */
+.game-id-display {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--bg-color);
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--border-color);
+}
+
+.game-id-text {
+  font-family: 'Courier New', monospace;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  flex: 1;
+  word-break: break-all;
+}
+
+.copy-btn {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.copy-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.share-hint {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 0.4rem;
+}
+
+/* ── Player Info ── */
+.player-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.player-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: var(--bg-color);
+  border-radius: 6px;
+}
+
+.color-indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+}
+
+.color-indicator.white {
+  background: #fff;
+}
+
+.color-indicator.black {
+  background: #000;
+}
+
+.turn-indicator {
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.your-turn {
+  color: var(--success);
+  font-weight: 600;
+}
+
+.opponent-turn {
+  color: var(--text-secondary);
+}
+
+.game-ended-badge {
+  color: var(--warning, #f59e0b);
+  font-weight: 600;
+}
+
+.spectator-badge {
+  text-align: center;
+  padding: 1rem;
+  background: var(--bg-color);
+  border-radius: 6px;
+  color: var(--text-secondary);
+}
+
+/* ── Players Panel ── */
+.players-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.player-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  background: var(--bg-color);
+  transition: all 0.25s;
+}
+
+.player-row.active-turn {
+  background: rgba(134, 194, 50, 0.1);
+  border: 1px solid rgba(134, 194, 50, 0.3);
+  box-shadow: 0 0 8px rgba(134, 194, 50, 0.15);
+}
+
+.player-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.turn-dot {
+  color: var(--primary-color);
+  font-size: 0.7rem;
+  animation: pulse-dot 1.2s infinite;
+}
+
+@keyframes pulse-dot {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.vs-divider {
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.15rem 0;
+}
+
+/* ── Moves List ── */
+.moves-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.moves-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.move-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: var(--bg-color);
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+}
+
+/* Black's moves are always even-position children (2nd, 4th, …) */
+.moves-grid .move-item:nth-child(even) {
+  background: rgba(128, 128, 128, 0.12);
+}
+
+.move-number {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.move-notation {
+  color: var(--text-primary);
+}
+
+.no-moves {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 2rem;
+  font-style: italic;
+}
+
+/* ── Inline Game Status (spectators / fallback) ── */
+.game-status {
+  margin-top: auto;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: white;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.game-status h3 {
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.game-status p {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.btn-home-inline {
+  margin-top: 1rem;
+  background: white;
+  color: var(--primary-color);
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.4rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-home-inline:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Resign section ── */
+.resign-section {
+  border-top: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  padding-top: 1rem;
+}
+
+.btn-resign {
+  width: 100%;
+  background: transparent;
+  border: 2px solid #e74c3c;
+  color: #e74c3c;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.03em;
+}
+
+.btn-resign:hover {
+  background: rgba(231, 76, 60, 0.12);
+  transform: translateY(-1px);
+}
+
+.resign-confirm {
+  background: rgba(231, 76, 60, 0.08);
+  border: 1px solid rgba(231, 76, 60, 0.35);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.resign-warn {
+  font-size: 0.85rem;
+  color: #e74c3c;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.resign-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.btn-confirm-resign {
+  flex: 1;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-confirm-resign:hover {
+  background: #c0392b;
+}
+
+.btn-cancel-resign {
+  flex: 1;
+  background: transparent;
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.2));
+  color: var(--text-primary, #fff);
+  border-radius: 7px;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-cancel-resign:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+/* Resign penalty row inside score breakdown */
+.resign-penalty-row {
+  border-top: 1px dashed rgba(231, 76, 60, 0.4);
+  padding-top: 0.4rem;
+  margin-top: 0.2rem;
+}
+
+/* ══════════════════════════════════════
+   GAME OVER MODAL
+══════════════════════════════════════ */
+.game-over-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(6px);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.game-over-modal {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 2.5rem;
+  max-width: 440px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 2px solid transparent;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(60px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.game-over-modal.win {
+  border-color: #22c55e;
+}
+
+.game-over-modal.loss {
+  border-color: #ef4444;
+}
+
+.game-over-modal.draw {
+  border-color: #f59e0b;
+}
+
+.game-over-icon {
+  font-size: 4rem;
+  margin-bottom: 0.5rem;
+  animation: bounceIn 0.5s 0.2s both;
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0);
+  }
+
+  60% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.game-over-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 0.3rem;
+}
+
+.game-over-modal.win .game-over-title {
+  color: #22c55e;
+}
+
+.game-over-modal.loss .game-over-title {
+  color: #ef4444;
+}
+
+.game-over-modal.draw .game-over-title {
+  color: #f59e0b;
+}
+
+.game-over-reason {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+/* Score display */
+.score-display {
+  background: var(--bg-color);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.score-delta {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+}
+
+.score-delta.positive {
+  color: #22c55e;
+}
+
+.score-delta.negative {
+  color: #ef4444;
+}
+
+.friend-game-badge {
+  display: inline-block;
+  background: rgba(134, 194, 50, 0.15);
+  border: 1px solid rgba(134, 194, 50, 0.45);
+  color: #86c232;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.score-change {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.score-old {
+  font-weight: 600;
+}
+
+.score-arrow {
+  opacity: 0.5;
+}
+
+.score-new {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Breakdown */
+.score-breakdown {
+  border-top: 1px solid var(--border-color);
+  padding-top: 0.75rem;
+  text-align: left;
+}
+
+.breakdown-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.breakdown-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  padding: 0.25rem 0;
+  color: var(--text-secondary);
+}
+
+.breakdown-item .pos {
+  color: #22c55e;
+  font-weight: 700;
+}
+
+.breakdown-item .neg {
+  color: #ef4444;
+  font-weight: 700;
+}
+
+/* Action buttons */
+.game-over-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.btn-home,
+.btn-play-again {
+  flex: 1;
+  padding: 0.85rem 1.2rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-home {
+  background: var(--secondary-color, #334155);
+  color: white;
+}
+
+.btn-play-again {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn-home:hover,
+.btn-play-again:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .game-content {
+    flex-direction: column;
+  }
+
+  .game-board-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .timer-column {
+    flex-direction: row;
+    justify-content: center;
+    align-self: auto;
+    gap: 1rem;
+  }
+
+  .game-sidebar {
+    flex: 1;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .board-wrapper {
+    padding: 0.5rem;
+  }
+
+  .timer {
+    min-width: 120px;
+    padding: 0.75rem 1rem;
+  }
+
+  .timer-value {
+    font-size: 1.3rem;
+  }
+
+  .game-over-modal {
+    padding: 1.5rem;
+  }
+
+  .game-over-title {
+    font-size: 1.7rem;
+  }
+
+  .game-over-actions {
+    flex-direction: column;
+  }
+}

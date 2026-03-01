@@ -1,0 +1,16 @@
+{
+  "name": "multiplayer-chess-platform",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w backend",
+    "dev:backend": "npm run dev -w backend",
+    "dev:frontend": "npm run dev -w frontend",
+    "install:all": "npm install && npm install -w backend && npm install -w frontend"
+  }
+}
+
+
