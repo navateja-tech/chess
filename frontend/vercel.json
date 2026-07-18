@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://chess-backend-6j5c.onrender.com/api/$1"
+    }
+  ]
+}
