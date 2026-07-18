@@ -28,7 +28,7 @@ export default function PlayOnline() {
 
   useEffect(() => {
     if (user && token) {
-      const newSocket = io('http://localhost:5000')
+      const newSocket = io(import.meta.env.VITE_BACKEND_URL)
       newSocket.emit('auth:init', { userId: user.user_id })
       newSocket.on('matchmaking:matched', ({ gameId, whiteName, blackName }) => {
         setSearching(false)

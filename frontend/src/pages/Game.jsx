@@ -49,7 +49,7 @@ export default function Game() {
   useEffect(() => {
     if (user && token) {
       setLoading(true)
-      const newSocket = io('http://localhost:5000')
+      const newSocket = io(import.meta.env.VITE_BACKEND_URL)
       newSocket.emit('auth:init', { userId: user.user_id })
       newSocket.emit('spectate:join', { gameId })
 

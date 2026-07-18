@@ -28,7 +28,8 @@ export default function PlayWithFriends() {
   useEffect(() => {
     if (!user || !token) return
 
-    const sock = io('http://localhost:5000')
+    const sock = io(import.meta.env.VITE_BACKEND_URL)
+
     socketRef.current = sock
 
     sock.emit('auth:init', { userId: user.user_id })
