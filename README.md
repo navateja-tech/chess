@@ -1,5 +1,9 @@
 # ♟️ Chess — Real-Time Multiplayer Chess
 
+
+https://github.com/user-attachments/assets/20c0076b-295c-4081-b0d7-5f969f4c4f20
+
+
 A full-stack web-based chess application that allows players to play chess through a modern interactive interface. The project follows a separate frontend/backend architecture and is designed for real-time gameplay.
 
 ## 🚀 Live Demo
@@ -344,5 +348,5 @@ GitHub: [@navateja-tech](https://github.com/navateja-tech)
 ⭐ If you found this project useful, consider giving the repository a star!
 
 
-https://github.com/user-attachments/assets/20c0076b-295c-4081-b0d7-5f969f4c4f20
+
 
